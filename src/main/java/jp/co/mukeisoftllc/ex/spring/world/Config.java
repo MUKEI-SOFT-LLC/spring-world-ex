@@ -1,6 +1,7 @@
 package jp.co.mukeisoftllc.ex.spring.world;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ public class Config {
     @Autowired
     private Environment env;
 
+    @Qualifier("textPath")
     @Bean
     public Path textPath() {
         if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
@@ -26,6 +28,7 @@ public class Config {
         }
     }
 
+    @Qualifier("imagePath")
     @Bean
     public Path imagePath() {
         if (Arrays.asList(env.getActiveProfiles()).contains("test")) {

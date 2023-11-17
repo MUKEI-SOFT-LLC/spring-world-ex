@@ -3,6 +3,8 @@ package jp.co.mukeisoftllc.ex.spring.world.services;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class FileService {
 
@@ -21,6 +22,11 @@ public class FileService {
     private final Path textPath;
     @NonNull
     private final Path imagePath;
+    public FileService(@Autowired @Qualifier("textPath") Path textPath,
+                       @Autowired @Qualifier("imagePath") Path imagePath) {
+        this.textPath = textPath;
+        this.imagePath = imagePath;
+    }
 
     public String readText(String fileName) throws IOException {
         return new String(read(textPath, fileName), StandardCharsets.UTF_8);
