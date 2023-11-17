@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Config {
 
     @Autowired
-    private Environment env;
+    private CustomEnvironment env;
 
     @Qualifier("textPath")
     @Bean
