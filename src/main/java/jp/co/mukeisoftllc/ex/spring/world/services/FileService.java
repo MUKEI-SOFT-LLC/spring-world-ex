@@ -37,6 +37,7 @@ public class FileService {
     }
 
     byte[] read(Path path, String fileName) throws IOException {
+        log.info("reading {} {}", path.toFile().getAbsolutePath(), fileName);
         final var file = path.resolve(fileName).toAbsolutePath();
         return Files.readAllBytes(file);
     }
@@ -50,6 +51,7 @@ public class FileService {
     }
 
     void write(Path path, String fileName, byte[] content) throws IOException {
+        log.info("writing {} {} {} bytes.", path.toFile().getAbsolutePath(), fileName, content.length);
         final var file = path.resolve(fileName).toAbsolutePath();
         Files.createFile(file);
         Files.write(file, content);
